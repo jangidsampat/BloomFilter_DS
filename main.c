@@ -4,43 +4,41 @@
 #include <inttypes.h>
 #include <stdint.h>
 #define MAX 100
+#define lli unsigned long long int
 bool map[MAX];
 
-uint32_t mapFun(const uint8_t* key, size_t length, int x) {
-
-  
-  size_t i = 0;
-  uint32_t hash = x;
+lli mapFun(const char* key, int length, int x) {
+  int i = 0;
+  lli hash = x;
   while (i != length) {
-
     hash += key[i++];
     hash += hash << 10;
     hash ^= hash >> 6;
-
   }
   hash += hash << 3;
   hash ^= hash >> 11;
   hash += hash << 15;
+  printf("The Thing - %lld, %d, %d, %s\n", hash, length, x, key);
   return hash%MAX;
-
-
 }
 
 void add(char *x) {
-  int a,b,c;
-  a=mapFun(x, 1, 0);
-  b=mapFun(x, 11, a);
-  c=mapFun(x, 111, b);
+  lli a,b,c;
+  int len=strlen(x);
+  a=mapFun(x, len, 0);
+  b=mapFun(x, len, a);
+  c=mapFun(x, len, b);
   map[a]=1;
   map[b]=1;
   map[c]=1;
 }
 
 bool find(char *x) {
-  int a,b,c;
-  a=mapFun(x, 1, 0);
-  b=mapFun(x, 11, a);
-  c=mapFun(x, 111, b);
+  lli a,b,c;
+  int len=strlen(x);
+  a=mapFun(x, len, 0);
+  b=mapFun(x, len, a);
+  c=mapFun(x, len, b);
   if (map[a]+map[b]+map[c]==3) return 1;
   return 0;
 }
