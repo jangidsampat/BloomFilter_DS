@@ -18,7 +18,6 @@ lli mapFun(const char* key, int length, int x) {
   hash += hash << 3;
   hash ^= hash >> 11;
   hash += hash << 15;
-  printf("The Thing - %lld, %d, %d, %s\n", hash, length, x, key);
   return hash%MAX;
 }
 
