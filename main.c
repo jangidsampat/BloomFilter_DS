@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include <inttypes.h>
-#include <stdint.h>
 #define MAX 100
 #define lli unsigned long long int
 bool map[MAX];
@@ -54,11 +52,13 @@ int main(void) {
     scanf("%d", &ch);
     switch (ch) {
       case 1:
+        printf("Add What? : ");
         scanf("%s", x);
         add(x);
         break;
 
       case 2:
+        printf("Find What? : ");
         scanf("%s", x);
         if (find(x)) {
           printf("%s : Might be in the Array\n", x);
